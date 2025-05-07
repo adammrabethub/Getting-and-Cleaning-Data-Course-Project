@@ -1,0 +1,46 @@
+Project Code Book
+
+Source Data Overview
+
+The source data used in this project comes from the Human Activity Recognition Using Smartphones Data Set. A comprehensive description of the dataset can be found at: Human Activity Recognition Data Set. You can download the dataset here: Download Link.
+
+R Script Explanation
+
+The run_analysis.R script prepares the data and performs the five necessary steps as outlined in the course project requirements.
+
+Download the dataset.
+
+Assign data to variables:
+features <- features.txt: This file contains the selected features from the accelerometer and gyroscope's 3-axial raw signals (tAcc-XYZ and tGyro-XYZ).
+activities <- activity_labels.txt: This file lists the activities associated with the corresponding measurements and their respective codes (labels).
+subject_test <- test/subject_test.txt: This file contains test data from 9 out of 30 volunteer subjects.
+x_test <- test/X_test.txt: This file contains the recorded test data features.
+y_test <- test/y_test.txt: This file holds the activity code labels for the test data.
+subject_train <- test/subject_train.txt: This file contains training data from 21 out of 30 volunteer subjects.
+x_train <- test/X_train.txt: This file contains the recorded training data features.
+y_train <- test/y_train.txt: This file holds the activity code labels for the training data.
+
+Merge the training and test sets to create a single dataset:
+X is created by merging x_train and x_test using the rbind() function.
+Y is created by merging y_train and y_test using the rbind() function.
+Subject is created by merging subject_train and subject_test using the rbind() function.
+Merged_Data is then created by combining Subject, Y, and X using the cbind() function.
+
+Extract only the measurements of the mean and standard deviation:
+TidyData is created by subsetting Merged_Data and selecting only the columns related to subject, activity code, and the mean and standard deviation measurements for each variable.
+
+Replace activity codes with descriptive names:
+The activity codes in the code column of TidyData are replaced with the corresponding activity names from the activities variable.
+
+Label the dataset with descriptive variable names:
+The code column is renamed to activities.
+The term Acc in column names is replaced by Accelerometer.
+The term Gyro in column names is replaced by Gyroscope.
+The term BodyBody in column names is replaced by Body.
+The term Mag in column names is replaced by Magnitude.
+Any column name starting with f is replaced by Frequency.
+Any column name starting with t is replaced by Time.
+
+Create a second tidy dataset with the average of each variable for each activity and subject:
+FinalData is created by summarizing TidyData, calculating the means of each variable for each subject and activity, after grouping by both subject and activity.
+The FinalData is exported as a FinalTidyData.txt file.
